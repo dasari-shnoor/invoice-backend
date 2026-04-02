@@ -26,12 +26,14 @@ DATABASE_URL="postgresql://username:password@localhost:5432/invoice_db?schema=pu
 PORT=3000
 ```
 
-### 3. Initialize Database
-Create the database tables using Prisma's migration tools:
+### 3. Initialize & Migrate Database
+Create the database tables using Prisma's migration tools. Run the following command to create your first migration and push the schema to the database:
+
 ```bash
-npx prisma generate
-npx prisma db push
+npx prisma migrate dev --name init
 ```
+
+> **Note for Windows Users:** If you get an `EPERM: operation not permitted` error (specifically on `query_engine-windows.dll.node`), it means the `npm run dev` server is currently running and locking the Prisma client files. You must **stop the development server** (Ctrl+C in the terminal) before running any `prisma generate` or `prisma migrate` commands! After it finishes, you can start `npm run dev` again.
 
 ### 4. Run the Server
 For development (with auto-reload):
